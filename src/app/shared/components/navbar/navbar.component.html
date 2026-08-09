@@ -1,8 +1,8 @@
 <nav class="navbar-container">
   <div class="navbar-brand-container">
-    <a routerLink="/dashboard" class="logo-link">
-      <img src="images/logo.jpeg" alt="Logo" class="navbar-logo">
-    </a>
+    <a routerLink="/dashboard" class="navbar-brand">
+  <img [src]="logoPath" alt="Logo Gotechedu" class="navbar-logo">
+</a>
   </div>
   <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">Tableau de bord</a>
   <a routerLink="/courses" routerLinkActive="active" class="nav-item">Cours</a>
