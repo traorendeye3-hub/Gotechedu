@@ -1,17 +1,42 @@
 pipeline {
     agent any
 
+    environment {
+        // Remplacez le chemin ci-dessous par celui obtenu à l'étape 1
+        PATH = "\Users\user\AppData\Local\Programs\DockerDesktop\resources\bin\;${env.PATH}"
+    }
+
     stages {
-        stage('Test Docker') {
+        stage('Checkout') {
             steps {
-                bat 'docker --version'
+                echo 'Récupération du code source...'
+                checkout scm
             }
         }
 
         stage('Build Docker Image') {
             steps {
+                echo 'Construction de l image Docker...'
                 bat 'docker build -t gotechedu-frontend:latest .'
             }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Déploiement du conteneur...'
+                bat 'docker stop gotechedu-app || exit 0'
+                bat 'docker rm gotechedu-app || exit 0'
+                bat 'docker run -d --name gotechedu-app -p 8081:80 gotechedu-frontend:latest'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Le déploiement a réussi ! Accédez à l application sur http://localhost:8081'
+        }
+        failure {
+            echo 'Le déploiement a échoué. Vérifiez les logs.'
         }
     }
 }
