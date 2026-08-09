@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     environment {
-        // Remplacez le chemin ci-dessous par celui obtenu à l'étape 1
-        PATH = "\Users\user\AppData\Local\Programs\DockerDesktop\resources\bin\;${env.PATH}"
+        PATH = "C:\\Windows\\System32;C:\\Users\\user\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;${env.PATH}"
     }
 
     stages {
