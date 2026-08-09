@@ -6,9 +6,13 @@ COPY . .
 RUN npm run build -- --configuration production
 
 FROM nginx:alpine
+# Copie de la configuration Nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Remplacer la ligne de copie par celle-ci (ajout de /browser) :
+# Nettoyage du dossier HTML par défaut
+RUN rm -rf /usr/share/nginx/html/*
+
+# COPIE DEPUIS LE SOUS-DOSSIER /browser
 COPY --from=build /app/dist/elearning-platform/browser /usr/share/nginx/html
 
 EXPOSE 80
