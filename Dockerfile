@@ -8,8 +8,8 @@ RUN npm run build -- --configuration production
 FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Remplacer 'gotechedu/browser' par 'elearning-platform'
-COPY --from=build /app/dist/elearning-platform /usr/share/nginx/html
+# Remplacer la ligne de copie par celle-ci (ajout de /browser) :
+COPY --from=build /app/dist/elearning-platform/browser /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
