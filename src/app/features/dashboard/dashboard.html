@@ -1,0 +1,108 @@
+<div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f7fb; min-height: 100vh; margin: 0; padding: 40px; box-sizing: border-box; width: 100%;">
+  
+  <div style="width: 100%; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px;">
+    
+    <!-- ================= VUE : PAGE DE CONNEXION (LOGIN) ================= -->
+    <div *ngIf="activeTab === 'login'" style="max-width: 400px; width: 100%; margin: 80px auto; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); text-align: center;">
+      <h2 style="color: #1a2332; margin-bottom: 10px; font-size: 1.8rem;">UNCHK E-Learning</h2>
+      <p style="color: #7f8c8d; margin-bottom: 30px; font-size: 0.95rem;">Veuillez vous connecter à votre espace étudiant</p>
+      
+      <div style="text-align: left; margin-bottom: 20px;">
+        <label style="display: block; color: #4a5568; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">Adresse e-mail</label>
+        <input type="email" value="khadidiatou.traore3@unchk.edu.sn" disabled style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; background-color: #f8fafc; box-sizing: border-box;">
+      </div>
+
+      <div style="text-align: left; margin-bottom: 30px;">
+        <label style="display: block; color: #4a5568; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">Mot de passe</label>
+        <input type="password" value="123456" disabled style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; background-color: #f8fafc; box-sizing: border-box;">
+      </div>
+
+      <button (click)="login()" style="width: 100%; background-color: #007acc; color: white; border: none; padding: 14px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: 0.2s;" onmouseover="this.style.backgroundColor='#0062a3'" onmouseout="this.style.backgroundColor='#007acc'">
+        Se connecter à l'espace
+      </button>
+    </div>
+
+    <!-- ================= VUE : TABLEAU DE BORD ================= -->
+    <ng-container *ngIf="activeTab === 'dashboard'">
+      <!-- Bannière Bleue -->
+      <div style="background-color: #007acc; color: white; padding: 35px 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+        <h1 style="margin: 0 0 10px 0; font-size: 1.8rem; font-weight: 700;">Contente de vous revoir !</h1>
+        <p style="margin: 0; font-size: 1.05rem; opacity: 0.9;">Explorez vos modules d'enseignement et suivez votre progression en temps réel.</p>
+      </div>
+
+      <!-- Compteurs Statistiques -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <div style="background: white; border-radius: 8px; padding: 25px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); border-bottom: 4px solid #007acc;">
+<div style="font-size: 2.5rem; font-weight: bold; color: #1a2332; margin-bottom: 5px;">{{ courses.length }}</div>
+          <div style="color: #7f8c8d; font-size: 0.95rem; font-weight: 500;">Cours disponibles</div>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 25px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); border-bottom: 4px solid #007acc;">
+          <div style="font-size: 2.5rem; font-weight: bold; color: #5f6268; margin-bottom: 5px;">0h</div>
+          <div style="color: #7f8c8d; font-size: 0.95rem; font-weight: 500;">Temps d'apprentissage</div>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 25px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.03); border-bottom: 4px solid #007acc;">
+          <div style="font-size: 2.5rem; font-weight: bold; color: #1a2332; margin-bottom: 5px;">0</div>
+          <div style="color: #7f8c8d; font-size: 0.95rem; font-weight: 500;">Certifications</div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- ================= VUE : LISTE DES COURS (MES COURS) ================= -->
+    <div *ngIf="activeTab === 'cours'">
+      <h2 style="color: #1a2332; font-size: 1.4rem; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;">
+        Vos Modules d'Enseignement
+      </h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px;">
+        <div *ngFor="let course of courses" style="background: white; border-radius: 8px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-top: 4px solid #007acc; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; box-sizing: border-box;">
+          <div>
+            <span style="font-size: 0.8rem; font-weight: 700; color: #007acc; text-transform: uppercase; letter-spacing: 0.8px;">{{ course.category }}</span>
+            <h3 style="margin: 12px 0 8px 0; color: #1a2332; font-size: 1.25rem; font-weight: 700; line-height: 1.4;">{{ course.title }}</h3>
+            <p style="color: #666; font-size: 0.95rem; line-height: 1.5; margin: 0 0 15px 0;">{{ course.description }}</p>
+            
+            <!-- Badges Thématiques Cliquables -->
+            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 5px;">
+              <span *ngFor="let topic of course.topics" 
+                    (click)="viewLesson(topic)"
+                    style="background-color: #f0f3f8; color: #4a5568; font-size: 0.75rem; padding: 6px 10px; border-radius: 4px; border: 1px solid #e2e8f0; cursor: pointer; transition: 0.2s;"
+                    onmouseover="this.style.backgroundColor='#e2e8f0'; this.style.color='#007acc'" 
+                    onmouseout="this.style.backgroundColor='#f0f3f8'; this.style.color='#4a5568'">
+                📌 {{ topic }}
+              </span>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #f0f2f5; padding-top: 15px; margin-top: 15px;">
+            <span style="color: #7f8c8d; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; font-weight: 500;">⏱️ {{ course.duration }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= VUE : VISUALISATION D'UNE LEÇON INTÉGRÉE ================= -->
+    <div *ngIf="activeTab === 'lecon'" style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+      <button (click)="selectTab('cours')" style="background: none; border: none; color: #007acc; font-weight: bold; cursor: pointer; font-size: 1rem; margin-bottom: 20px; padding: 0; display: flex; align-items: center; gap: 8px;">
+        ← Retour aux modules
+      </button>
+      
+      <h2 style="color: #1a2332; margin-top: 0; font-size: 1.8rem; border-bottom: 2px solid #f0f2f5; padding-bottom: 15px;">
+        📖 Leçon : {{ selectedTopic }}
+      </h2>
+      
+      <div style="margin-top: 20px; color: #2d3748; line-height: 1.7; font-size: 1.05rem;">
+        <p style="font-weight: bold; color: #4a5568;">Bienvenue dans votre support de cours interactif virtuel.</p>
+        <p>Ce module d'apprentissage en ligne regroupe l'ensemble des concepts fondamentaux rédigés pour cette leçon.</p>
+        
+        <div style="background-color: #f8fafc; border-left: 4px solid #007acc; padding: 20px; margin: 30px 0; border-radius: 0 6px 6px 0;">
+          <h4 style="margin: 0 0 10px 0; color: #1a2332;">💡 Objectifs clés de la session :</h4>
+          <ul style="margin: 0; padding-left: 20px;">
+            <li>Comprendre l'importance de ce concept au sein de votre formation Master 1.</li>
+            <li>Mettre en œuvre les architectures types correspondantes.</li>
+            <li>Valider les acquis par des simulations pratiques en atelier.</li>
+          </ul>
+        </div>
+        <p>Consultez la documentation complémentaire ou contactez votre tuteur académique pour toute question relative à cette session.</p>
+      </div>
+    </div>
+
+  </div>
+</div>

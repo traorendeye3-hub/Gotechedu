@@ -1,0 +1,53 @@
+<div class="courses-container">
+  <div class="hero-banner">
+    <div class="banner-content">
+      <span class="subtitle">Here you can find all courses</span>
+      <h1>All Courses</h1>
+    </div>
+    <div class="search-box">
+      <input type="text" placeholder="Search course..." (input)="onSearchChange($event)" />
+    </div>
+  </div>
+
+  <div class="courses-grid">
+    @for (course of filteredCourses(); track course.id) {
+      <div class="course-card">
+        
+        <div class="card-image-wrapper">
+          <img [src]="course.image" [alt]="course.title" />
+          @if (course.progress) {
+            <span class="progress-badge">{{ course.progress }}% Completed</span>
+          }
+        </div>
+
+        <div class="card-body">
+          <h3 class="course-title">{{ course.title }}</h3>
+
+          <div class="instructor-info">
+            <div class="avatar">{{ course.instructor.charAt(0) }}</div>
+            <span class="instructor-name">{{ course.instructor }}</span>
+          </div>
+
+          <!-- Liste des fichiers PDF de cours -->
+          <div class="pdf-sequences">
+            <p class="sequence-label">Documents de cours (PDF) :</p>
+            <div class="sequence-list">
+              @for (seq of course.sequences; track seq.title) {
+                <a [href]="seq.pdfUrl" target="_blank" class="pdf-btn">
+                  📄 {{ seq.title }}
+                </a>
+              }
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-primary" (click)="openCourse(course)">
+              Ouvrir Cours
+            </button>
+          </div>
+        </div>
+
+      </div>
+    }
+  </div>
+</div>

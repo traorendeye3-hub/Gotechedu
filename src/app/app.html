@@ -1,0 +1,39 @@
+<!-- Navbar horizontale (visible uniquement si l'utilisateur est connecté) -->
+<header *ngIf="isAuthenticated()" class="navbar">
+  <div class="nav-left">
+    <h1 class="logo">Gotechedu</h1>
+    
+    <nav class="nav-links">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+        Tableau de bord
+      </a>
+      <a routerLink="/courses" routerLinkActive="active" class="nav-item">
+        Cours
+      </a>
+      <a routerLink="/quiz" routerLinkActive="active" class="nav-item">
+        Quiz
+      </a>
+      <!-- Nouvel onglet pour le dépôt de devoirs/TP -->
+      <a routerLink="/assignments" routerLinkActive="active" class="nav-item">
+        Dépôts
+      </a>
+    </nav>
+  </div>
+
+  <div class="nav-right">
+    <span *ngIf="currentUser() as user" class="user-info">
+      👤 {{ user.fullName }}
+    </span>
+    
+    <button (click)="onLogout()" class="btn-logout">
+      Déconnexion
+    </button>
+  </div>
+</header>
+
+<!-- Affichage principal en plein écran sans Sidebar -->
+<div class="app-container">
+  <main class="content-full">
+    <router-outlet></router-outlet>
+  </main>
+</div>

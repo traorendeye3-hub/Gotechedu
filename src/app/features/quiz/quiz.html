@@ -1,0 +1,116 @@
+<div class="quiz-container">
+  
+  <!-- Titre Principal -->
+  <div class="quiz-header">
+    <h1>Espace d'Évaluation : Mes Quiz</h1>
+    <p>Sélectionnez un module d'enseignement pour tester vos connaissances.</p>
+  </div>
+
+  <!-- Étape 1 : Liste des quiz disponibles -->
+  <div *ngIf="!selectedQuiz()" class="quiz-grid">
+    <div *ngFor="let quiz of quizzes" class="quiz-card">
+      <div>
+        <span>{{ quiz.category }}</span>
+        <h3>{{ quiz.moduleTitle }}</h3>
+        <p>Contient {{ quiz.questions.length }} questions pour valider vos acquis théoriques.</p>
+      </div>
+      <button (click)="startQuiz(quiz)" class="start-btn">
+        Commencer le Test
+      </button>
+    </div>
+  </div>
+
+  <!-- Étape 2 : Déroulement du Quiz Actif -->
+  <div *ngIf="selectedQuiz() as quiz">
+    <div *ngIf="!quizFinished()" class="active-quiz-panel">
+      
+      <!-- En-tête de progression -->
+      <div class="quiz-progress">
+        <span class="quiz-progress-title">{{ quiz.moduleTitle }}</span>
+        <span class="quiz-progress-count">
+          Question {{ currentQuestionIndex() + 1 }} sur {{ quiz.questions.length }}
+        </span>
+      </div>
+
+      <!-- Question -->
+      <h2 class="question-text" *ngIf="currentQuestion() as question">
+        {{ question.questionText }}
+      </h2>
+
+      <!-- Options de réponse -->
+      <div class="options-list" *ngIf="currentQuestion() as question">
+        <div *ngFor="let option of question.options" 
+             (click)="selectOption(option)"
+             [class.selected]="userAnswers()[currentQuestionIndex()] === option"
+             class="option-item">
+          {{ option }}
+        </div>
+      </div>
+
+      <!-- Pied de page interactif avec les 3 boutons -->
+      <div class="quiz-actions">
+        <!-- Bouton Précédent -->
+        <button (click)="previousQuestion()" 
+                [disabled]="currentQuestionIndex() === 0"
+                class="prev-btn">
+          &larr; Précédent
+        </button>
+
+        <!-- Bouton Abandonner -->
+        <button (click)="resetQuiz()" class="cancel-btn">
+          Abandonner
+        </button>
+
+        <!-- Bouton Suivant / Terminer -->
+        <button (click)="nextQuestion()" class="next-btn">
+          {{ currentQuestionIndex() === quiz.questions.length - 1 ? 'Terminer' : 'Suivant &rarr;' }}
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Étape 3 : Résultat final et Récapitulatif complet -->
+    <div *ngIf="quizFinished()" class="result-panel">
+      <div class="result-icon">🏆</div>
+      <h2 class="result-title">Félicitations !</h2>
+      <p class="result-desc">Vous avez terminé le quiz sur l'évaluation de ce module.</p>
+      
+      <div class="score-badge">
+        Votre score : {{ score() }} / {{ quiz.questions.length }}
+      </div>
+
+      <!-- Détail et correction de toutes les questions -->
+      <div class="answers-review" style="margin-top: 30px; text-align: left;">
+        <h3 style="margin-bottom: 20px; font-size: 1.2rem; color: #1a2332;">Correction détaillée :</h3>
+        
+        <div *ngFor="let q of quiz.questions; let i = index" 
+             style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+          
+          <p style="font-weight: 600; margin-top: 0; color: #2d3748;">
+            Question {{ i + 1 }} : {{ q.questionText }}
+          </p>
+
+          <p style="margin: 8px 0; font-size: 0.95rem;">
+            <strong>Votre réponse :</strong> 
+            <span [style.color]="userAnswers()[i] === q.correctAnswer ? '#2e7d32' : '#d32f2f'" style="font-weight: 600;">
+              {{ userAnswers()[i] || 'Aucune réponse sélectionnée' }}
+            </span>
+            <span *ngIf="userAnswers()[i] === q.correctAnswer" style="color: #2e7d32; margin-left: 8px; font-weight: bold;">✓ Correct</span>
+            <span *ngIf="userAnswers()[i] && userAnswers()[i] !== q.correctAnswer" style="color: #d32f2f; margin-left: 8px; font-weight: bold;">✗ Incorrect</span>
+          </p>
+
+          <p *ngIf="userAnswers()[i] !== q.correctAnswer" style="margin: 8px 0; font-size: 0.95rem; color: #1e88e5; font-weight: 600;">
+            <strong>Bonne réponse :</strong> {{ q.correctAnswer }}
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: 25px; text-align: center;">
+        <button (click)="resetQuiz()" class="restart-btn">
+          Retourner aux quiz
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

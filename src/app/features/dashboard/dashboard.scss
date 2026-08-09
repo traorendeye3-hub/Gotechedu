@@ -1,0 +1,152 @@
+
+
+  // Le reste de ton code TypeScript reste exazctement le même...// Variables de couleurs
+$bg-sidebar: #1e293b;
+$blue-active: #0284c7;
+$blue-banner: #0077b6;
+$bg-main: #f1f5f9;
+$text-dark: #334155;
+$danger-red: #ef4444;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: $bg-main;
+}
+
+// Barre latérale (Sidebar)
+.sidebar {
+  width: 260px;
+  background-color: $bg-sidebar;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 0;
+
+  .sidebar-brand {
+    padding: 10px 20px 30px 20px;
+    h2 {
+      font-size: 1.4rem;
+      color: #38bdf8;
+      font-weight: 700;
+    }
+  }
+
+  .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 20px;
+      color: #cbd5e1;
+      cursor: pointer;
+      font-weight: 500;
+      gap: 12px;
+
+      &.active {
+        background-color: $blue-active;
+        color: #ffffff;
+        border-left: 4px solid #ffffff;
+      }
+    }
+  }
+
+  .sidebar-footer {
+    padding: 0 20px;
+    .btn-logout {
+      width: 100%;
+      padding: 12px;
+      background-color: $danger-red;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+}
+
+// Zone principale
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  .top-header {
+    height: 60px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 40px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .content-body {
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+
+// Bannière
+.welcome-banner {
+  background: linear-gradient(135deg, $blue-banner, #0096c7);
+  color: white;
+  padding: 35px 40px;
+  border-radius: 10px;
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+}
+
+// Grille et cartes
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.stat-card {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  border-bottom: 4px solid $blue-active;
+  text-align: center;
+  height: 140px;
+
+  .stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $text-dark;
+  }
+
+  .stat-label {
+    font-size: 0.95rem;
+    color: #64748b;
+  }
+}
+
+.clickable-card {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
