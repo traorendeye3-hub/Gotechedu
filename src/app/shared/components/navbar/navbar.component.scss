@@ -1,28 +1,70 @@
-.app-navbar {
+/* Conteneur principal de la barre de navigation */
+.navbar {
   display: flex;
   align-items: center;
-  gap: 10px;
-  background-color: #1a2332; // Fond sombre conforme à votre visuel
-  padding: 12px 20px;
+  justify-content: flex-start;
+  background-color: #1b2a4a; /* Couleur sombre du fond */
+  padding: 0.6rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
 
-  .nav-item {
-    color: #e2e8f0;
-    text-decoration: none;
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
+/* Zone réservée au logo */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  margin-right: 2.5rem;
+  text-decoration: none;
+}
 
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.08);
-    }
+/* Style de l'image du logo */
+.navbar-logo {
+  height: 38px; /* Ajuste la hauteur du logo dans la barre */
+  width: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  transition: transform 0.2s ease;
+}
 
-    // Effet bleu vif sélectionné (comme l'onglet "Cours" sur votre image)
-    &.active {
-      background-color: #0088cc;
-      color: #ffffff;
-      font-weight: 600;
-    }
-  }
+.navbar-logo:hover {
+  transform: scale(1.03);
+}
+
+/* Liste des liens de navigation */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.8rem;
+}
+
+/* Éléments de la liste */
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+
+/* Liens normaux (Cours, Quiz, Dépôts, etc.) */
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* Style de l'onglet actif (ex: Tableau de bord) */
+.nav-link.active {
+  background-color: #0084d1; /* Bleu vif identique à votre capture */
+  color: #ffffff;
 }
