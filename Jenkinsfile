@@ -1,26 +1,28 @@
 pipeline {
     agent any
 
-    environment {
-        PATH = "C:\\Windows\\System32;C:\\Users\\user\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;${env.PATH}"
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                echo 'Récupération du code source...'
-                checkout scm
+                echo 'Récupération du code source sécurisée...'
+                checkout scmGit(
+                    branches: [[name: '*/master']],
+                    userRemoteConfigs: [[
+                        credentialsId: 'github-credentials',
+                        url: 'https://github.com/traorendeye3-hub/Gotechedu.git'
+                    ]]
+                )
             }
         }
 
-        stage('Build Docker Image') {
+        stage("Construction de l'image Docker") {
             steps {
-                echo 'Construction de l image Docker...'
+                echo "Construction de l'image Docker..."
                 bat 'docker build -t gotechedu-frontend:latest .'
             }
         }
 
-        stage('Deploy') {
+        stage('Déploiement') {
             steps {
                 echo 'Déploiement du conteneur...'
                 bat 'docker stop gotechedu-app || exit 0'
@@ -32,10 +34,7 @@ pipeline {
 
     post {
         success {
-            echo 'Le déploiement a réussi ! Accédez à l application sur http://localhost:8081'
-        }
-        failure {
-            echo 'Le déploiement a échoué. Vérifiez les logs.'
+            echo "Le déploiement a réussi ! Accédez à l'application sur http://localhost:8081"
         }
     }
 }
