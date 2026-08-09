@@ -9,6 +9,5 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-  // Importation explicite du chemin
-  logoPath = 'images/logo.jpeg'; 
+  logoPath = 'images/logo.jpeg'; // Ou '/images/logo.jpeg'
 }
