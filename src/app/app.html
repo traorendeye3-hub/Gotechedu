@@ -1,7 +1,9 @@
 <!-- Navbar horizontale (visible uniquement si l'utilisateur est connecté) -->
 <header *ngIf="isAuthenticated()" class="navbar">
   <div class="nav-left">
-    <h1 class="logo">Gotechedu</h1>
+    <a routerLink="/dashboard">
+  <img src="images/logo.jpeg" alt="Gotechedu Logo" class="logo-img">
+</a>
     
     <nav class="nav-links">
       <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
