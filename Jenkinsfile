@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        // Ajoute Docker au PATH pour Jenkins
-        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
+        // Inclut System32 pour cmd.exe ET le dossier de Docker
+        PATH = "C:\\Windows\\System32;C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
     }
 
     stages {
