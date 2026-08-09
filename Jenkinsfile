@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        // Ajout explicite des chemins système Windows pour reconnaître 'cmd' et les commandes batch
-        PATH = "C:\\Windows\\System32;C:\\Windows;${env.PATH}"
+        // Inclusion de System32 ET du dossier binaire de Docker Desktop
+        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Users\\user\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;C:\\Windows\\System32;C:\\Windows;${env.PATH}"
     }
 
     stages {
