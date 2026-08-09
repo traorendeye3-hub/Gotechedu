@@ -42,17 +42,21 @@ header.navbar {
     }
 
     .logo-img {
-      height: 42px;
-      width: auto;
-      max-width: 180px;
-      object-fit: contain;
-      border-radius: 4px;
-      transition: transform 0.2s ease-in-out;
+  height: 32px; // Taille réduite (au lieu de 42px)
+  width: auto;
+  object-fit: contain;
+  background-color: #ffffff; // Fond blanc derrière l'image
+  padding: 4px 10px; // Espace interne autour du logo
+  border-radius: 6px; // Coins légèrement arrondis
+  border: 2px solid #0088cc; // Bordure visible aux couleurs du thème (bleu)
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); // Légère ombre pour faire ressortir la bordure
+  transition: all 0.2s ease-in-out;
 
-      &:hover {
-        transform: scale(1.03);
-      }
-    }
+  &:hover {
+    border-color: #ffffff; // Change de couleur au survol
+    transform: scale(1.03);
+  }
+}
   }
 
   // Liens de navigation
