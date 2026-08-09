@@ -1,8 +1,8 @@
+// Test du déclenchement automatique Poll SCM
 pipeline {
     agent any
 
     environment {
-        // Inclusion de System32 ET du dossier binaire de Docker Desktop
         PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Users\\user\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;C:\\Windows\\System32;C:\\Windows;${env.PATH}"
     }
 
