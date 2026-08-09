@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        // Ajout explicite des chemins système Windows pour reconnaître 'cmd' et les commandes batch
+        PATH = "C:\\Windows\\System32;C:\\Windows;${env.PATH}"
+    }
+
     stages {
         stage('Checkout') {
             steps {
