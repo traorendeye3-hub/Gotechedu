@@ -1,41 +1,27 @@
-<!-- Navbar horizontale (visible uniquement si l'utilisateur est connecté) -->
+<!-- Navbar horizontale (visible uniquement si l'utilisateur est authentifié) -->
 <header *ngIf="isAuthenticated()" class="navbar">
   <div class="nav-left">
-    <a routerLink="/dashboard">
-  <img src="images/logo.jpeg" alt="Gotechedu Logo" class="logo-img">
-</a>
-    
-    <nav class="nav-links">
-      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
-        Tableau de bord
-      </a>
-      <a routerLink="/courses" routerLinkActive="active" class="nav-item">
-        Cours
-      </a>
-      <a routerLink="/quiz" routerLinkActive="active" class="nav-item">
-        Quiz
-      </a>
-      <!-- Nouvel onglet pour le dépôt de devoirs/TP -->
-      <a routerLink="/assignments" routerLinkActive="active" class="nav-item">
-        Dépôts
-      </a>
-    </nav>
+    <h1 class="logo">Gotechedu</h1>
   </div>
+
+  <nav class="nav-links">
+    <a routerLink="/dashboard" routerLinkActive="active">
+      Tableau de bord
+    </a>
+    <a routerLink="/courses" routerLinkActive="active">
+      Cours
+    </a>
+    <a routerLink="/quiz" routerLinkActive="active">
+      Quiz
+    </a>
+    <!-- Nouvel onglet pour le dépôt de devoirs/TP -->
+    <a routerLink="/assignments" routerLinkActive="active">
+      Dépôts
+    </a>
+  </nav>
 
   <div class="nav-right">
-    <span *ngIf="currentUser() as user" class="user-info">
-      👤 {{ user.fullName }}
-    </span>
-    
-    <button (click)="onLogout()" class="btn-logout">
-      Déconnexion
-    </button>
+    <span class="user-name">Khadidiatou Traore</span>
+    <button class="btn-logout" (click)="logout()">Déconnexion</button>
   </div>
 </header>
-
-<!-- Affichage principal en plein écran sans Sidebar -->
-<div class="app-container">
-  <main class="content-full">
-    <router-outlet></router-outlet>
-  </main>
-</div>
