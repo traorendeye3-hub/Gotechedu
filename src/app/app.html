@@ -1,4 +1,4 @@
-<!-- Navbar horizontale (visible uniquement si l'utilisateur est authentifié) -->
+<!-- Navbar horizontale -->
 <header *ngIf="isAuthenticated()" class="navbar">
   <div class="nav-left">
     <h1 class="logo">Gotechedu</h1>
@@ -14,7 +14,6 @@
     <a routerLink="/quiz" routerLinkActive="active">
       Quiz
     </a>
-    <!-- Nouvel onglet pour le dépôt de devoirs/TP -->
     <a routerLink="/assignments" routerLinkActive="active">
       Dépôts
     </a>
@@ -25,3 +24,8 @@
     <button class="btn-logout" (click)="logout()">Déconnexion</button>
   </div>
 </header>
+
+<!-- Conteneur principal qui affiche le contenu des pages (Tableau de bord, Dépôts, etc.) -->
+<main class="main-container">
+  <router-outlet></router-outlet>
+</main>

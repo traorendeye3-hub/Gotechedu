@@ -15,12 +15,10 @@ export class App {
   constructor(private router: Router) {}
 
   isAuthenticated(): boolean {
-    return true; // Ou la logique de votre service d'authentification
+    return true;
   }
 
-  // Ajoutez cette méthode si elle est absente ou renommez-la si vous utilisiez onLogout()
   logout(): void {
-    // Logique de déconnexion (ex: suppression du token)
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
