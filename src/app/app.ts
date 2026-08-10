@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 
@@ -10,15 +10,18 @@ import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/rou
   styleUrls: ['./app.scss']
 })
 export class App {
-  // Déclarations temporaires de l'état d'authentification
-  isAuthenticated = signal<boolean>(true);
-  currentUser = signal<{ fullName: string } | null>({ fullName: 'Khadidiatou Traore' });
+  title = 'Gotechedu-Frontend';
 
   constructor(private router: Router) {}
 
-  onLogout(): void {
-    this.isAuthenticated.set(false);
-    this.currentUser.set(null);
+  isAuthenticated(): boolean {
+    return true; // Ou la logique de votre service d'authentification
+  }
+
+  // Ajoutez cette méthode si elle est absente ou renommez-la si vous utilisiez onLogout()
+  logout(): void {
+    // Logique de déconnexion (ex: suppression du token)
+    localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 }
