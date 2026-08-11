@@ -4,7 +4,7 @@ export type Lang = 'fr' | 'en';
 
 const TRANSLATIONS: Record<Lang, Record<string, string>> = {
   fr: {
-    'dashboard.welcome': 'Contente de vous revoir !',
+    'dashboard.welcome': 'Content de vous revoir !',
     'dashboard.subtitle': 'Explorez vos modules d\'enseignement et suivez votre progression en temps réel.',
     'dashboard.courses': 'Cours disponibles',
     'dashboard.learning_time': 'Temps d\'apprentissage',
